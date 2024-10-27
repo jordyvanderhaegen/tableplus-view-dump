@@ -10,7 +10,7 @@
             "type": "separator"
         },
         {
-            "name": "Copy VIEW as",
+            "name": "Copy View As",
             "location": "item",
             "type": "submenu",
             "children": [
