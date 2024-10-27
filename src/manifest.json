@@ -1,0 +1,44 @@
+{
+    "name": "View Dump",
+    "identifier": "tableplus-view-dump",
+    "version": "1.0.0",
+    "detail": "Copy create or drop syntax for database views",
+    "author": "Jordy Van der Haegen",
+    "scripts": [
+        {
+            "location": "item",
+            "type": "separator"
+        },
+        {
+            "name": "Copy VIEW as",
+            "location": "item",
+            "type": "submenu",
+            "children": [
+                {
+                    "type": "action",
+                    "script": "main.js",
+                    "handler": "copyCreateViewSyntax",
+                    "name": "CREATE"
+                },
+                {
+                    "type": "action",
+                    "script": "main.js",
+                    "handler": "copyCreateOrReplaceViewSyntax",
+                    "name": "CREATE OR REPLACE"
+                },
+                {
+                    "type": "action",
+                    "script": "main.js",
+                    "handler": "copyDropViewSyntax",
+                    "name": "DROP"
+                },
+                {
+                    "type": "action",
+                    "script": "main.js",
+                    "handler": "copyDropViewIfExistsSyntax",
+                    "name": "DROP IF EXISTS"
+                }
+            ]
+        }
+    ]
+}

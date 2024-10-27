@@ -1,0 +1,37 @@
+name: Publish plugin on release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Publish plugin
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: '⚙️ Setup Node'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: '🔨 Build assets with Vite'
+        run: |
+          cd ${{github.workspace}}
+          npm install
+          npm run build
+        shell: bash
+
+      - name: '📦 Append a zip of the plugin to the release'
+        run: |
+          cd ${{github.workspace}}
+          zip -r ViewDump.tableplusplugin.zip ViewDump.tableplusplugin
+          gh release upload ${{github.event.release.tag_name}} ViewDump.tableplusplugin.zip
+        env:
+          GITHUB_TOKEN: ${{ github.TOKEN }}
+        shell: bash
